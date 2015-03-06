@@ -11,6 +11,7 @@ Welcome to smartreport's documentation!
    :titlesonly:
 
    introduction
+   limitations
 
 
 
