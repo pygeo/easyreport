@@ -1,14 +1,7 @@
+"""
+easyreport main class
+"""
 
-
-#~ parse interface file
-#~
-#~ write results to an specified output directory, if not given then temporary
-#~
-#~ generate files
-#~
-#~ compile using sphinx
-#~
-#~ and get output
 
 
 

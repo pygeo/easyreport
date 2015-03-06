@@ -166,11 +166,13 @@ Current Limitations and ideas
 -------------------
 
 * supports only generation of report based on a single YAML file. Combination from results of different YAML files (e.g. as results of different diagnostics) would be needed
-* SPHINX layout based on default setup, allow users to specify customized setup
-* develop template files for different kind of usecases --> user should invest as less time as possible into understanding makotemplates
-* SPHINX is currently called from the command line. This can be done better using Sphinx builder class
 * handling of images; images would need to be copied / linked from the original directory
 
+* SPHINX is currently called from the command line. This can be done better using Sphinx builder class
+
+
+* develop template files for different kind of usecases --> user should invest as less time as possible into understanding makotemplates
+* SPHINX layout based on default setup, allow users to specify customized setup
 
 
 
