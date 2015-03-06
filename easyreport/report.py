@@ -1,21 +1,12 @@
 """
 easyreport main class
 """
-
-
-
-
-
 import os
 import tempfile
 import yaml
 
-#~ define a sphinx template file ????
-#~ otherwise just take the default one !
-
-
 class Report(object):
-    def __init__(self, template_file, interface_file, output_directory=None, output_file=None, suffix=None, sphinx_dir='.'+os.sep+'sphinx_cfg', report_format='html'):
+    def __init__(self, template_file, interface_file, output_directory=None, output_file=None, suffix=None, sphinx_dir='.'+ os.sep + 'easyreport' + os.sep + 'sphinx_cfg', report_format='html'):
         """
         template_file : str
             name of file which contains template to parse
@@ -48,9 +39,12 @@ class Report(object):
         """
         if self.output_directory is None:
             self.output_directory = tempfile.mkdtemp()
+            print 'Generate temporary output directory ... ' + self.output_directory
         else:
             if not os.path.exists(self.output_directory):
                 os.makedirs(self.output_directory)
+                print 'Output directory created!'
+        print 'Output directory: ', self.output_directory
         if self.output_directory[-1] != os.sep:
             self.output_directory += os.sep
         assert os.path.exists(self.output_directory), 'Output directory not existing!'
