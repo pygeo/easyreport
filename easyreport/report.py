@@ -28,7 +28,6 @@ class Report(object):
         self.interface = interface_file
         self.suffix = suffix
         self.report_format = report_format
-
         self.sphinx_dir = sphinx_dir
 
         self._check()
@@ -44,12 +43,12 @@ class Report(object):
             if not os.path.exists(self.output_directory):
                 os.makedirs(self.output_directory)
                 print 'Output directory created!'
-        print 'Output directory: ', self.output_directory
+        #~ print 'Output directory: ', self.output_directory
         if self.output_directory[-1] != os.sep:
             self.output_directory += os.sep
         assert os.path.exists(self.output_directory), 'Output directory not existing!'
-        assert os.path.exists(self.template), 'Template file is not existing!'
-        assert os.path.exists(self.interface), 'Interface file is not existing!'
+        assert os.path.exists(self.template), 'Template file is not existing! ' + self.template
+        assert os.path.exists(self.interface), 'Interface file is not existing! ' + self.interface
         assert self.suffix is not None, 'Suffix needs to be given'
         assert os.path.exists(self.sphinx_dir), 'Sphinx directory not existing!'
 
@@ -62,14 +61,15 @@ class Report(object):
         else:
             self.output_file += '.' + self.suffix
 
-    def compile(self):
+    def compile(self, run=False):
         """
         generate report and
         compile report using SPHINX
         """
         # generate report based on templates
         self._generate_report()
-        self._run_sphinx()
+        if run:
+            self._run_sphinx([self.output_file])
 
     def _generate_report(self):
         """
@@ -89,19 +89,24 @@ class Report(object):
         o.write(res)
         o.close()
 
-    def _run_sphinx(self):
+    def _run_sphinx(self, flist):
         """
         run SPHINX to generate report
         uses currently a generic template
+
+        Parameters
+        ----------
+        flist : list
+            list of names to be included in index.rst
         """
 
-        self._gen_sphinx_template()
+        self._gen_sphinx_template(flist)
         curdir=os.curdir
         os.chdir(self.output_directory)
         self._make(self.report_format)
         os.chdir(curdir)
 
-    def _gen_sphinx_template(self):
+    def _gen_sphinx_template(self, flist):
         """
         generate sphinx template; currently use standard setup which
         is copied from the specified spinx directory
@@ -119,12 +124,18 @@ class Report(object):
             os.remove(ofile)
         O = open(ofile, 'w')
 
+        sep = '   '
+        eol = '\n'
+
+        files = ''
+        for a in flist:
+            files += sep + a + eol
+
         for l in F.readlines():
-            c = l.replace('<FILES>', self.output_file)
+            c = l.replace('<FILES>', files)
             O.write(c)
         F.close()
         O.close()
-
 
     def _make(self, fmt):
         """ run sphinxs with specified format """
