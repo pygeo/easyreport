@@ -1,4 +1,4 @@
-https://readthedocs.org/projects/easyreport/?badge=latest
+![ReadTheDocs](https://readthedocs.org/projects/easyreport/?badge=latest)
 
 EASYREPORT
 ==========
