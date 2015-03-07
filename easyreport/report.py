@@ -4,6 +4,7 @@ easyreport main class
 import os
 import tempfile
 import yaml
+import subprocess
 
 class Report(object):
     def __init__(self, template_file, interface_file, output_directory=None, output_file=None, suffix=None, sphinx_dir='.'+ os.sep + 'easyreport' + os.sep + 'sphinx_cfg', report_format='html'):
@@ -116,6 +117,8 @@ class Report(object):
 
         # copy sphinx standard setup
         os.system('cp -r ' + self.sphinx_dir + '* ' + self.output_directory)
+        #subprocess.call(['cp', '-r', self.sphinx_dir + '*', self.output_directory])
+
 
         # modify index file
         F = open(self.output_directory + 'index_template.rst')
@@ -140,9 +143,7 @@ class Report(object):
     def _make(self, fmt):
         """ run sphinxs with specified format """
         assert fmt in ['html', 'latexpdf'], 'Unsupported format!'
-        os.system('make ' + fmt)
-        #TBD use sphinx directly
-        #http://sphinx-doc.org/config.html#build-config
+        subprocess.call(["make", fmt])
 
     def parse(self):
         """
