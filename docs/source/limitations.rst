@@ -1,7 +1,6 @@
 Todo
 ----
 
-* setup.py
 * implement unittests
 
 
