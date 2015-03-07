@@ -2,7 +2,6 @@ Todo
 ----
 
 * setup.py
-* proper license
 * implement unittests
 
 

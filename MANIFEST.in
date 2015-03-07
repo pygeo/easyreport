@@ -1,0 +1,10 @@
+recursive-include easyreport/sphinx_cfg
+include Makefile
+include COPYRIGHT
+include LICENSE
+global-include *.rst
+include README.md
+global-include *.ipynb
+include README
+
+
