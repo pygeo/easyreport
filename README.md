@@ -1,3 +1,6 @@
+
+[![Documentation Status](https://readthedocs.org/projects/easyreport/badge/?version=latest)](https://readthedocs.org/projects/easyreport/?badge=latest)
+
 EASYREPORT
 ==========
 
