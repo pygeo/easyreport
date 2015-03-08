@@ -1,5 +1,5 @@
 
-[![Documentation Status](https://readthedocs.org/projects/easyreport/badge/?version=latest)](https://readthedocs.org/projects/easyreport/?badge=latest)
+[![Build Status](https://travis-ci.org/pygeo/easyreport.svg?branch=master)](https://travis-ci.org/pygeo/easyreport) [![Documentation Status](https://readthedocs.org/projects/easyreport/badge/?version=latest)](https://readthedocs.org/projects/easyreport/?badge=latest)
 
 EASYREPORT
 ==========
