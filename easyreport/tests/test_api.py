@@ -50,6 +50,8 @@ class TestData(TestCase):
         for k in R.sections.keys():
             self.assertTrue(k in ['models', 'observations', 'misc'])
 
+        self.assertEqual(R.sections['models'][1],2)
+
 
 
     def test_save(self):
