@@ -11,13 +11,14 @@ class Feature(object):
     """
     class to handle
     """
-    def __init__(self, **kwargs):
+    def __init__(self, id, **kwargs):
+        self.id = id
         for k in kwargs.keys():  # set class attributes from kwargs
             setattr(self, k, kwargs[k])
 
 class GraphicFeature(Feature):
-    def __init__(self, caption, file, **kwargs):
-        super(GraphicFeature, self).__init__(caption=caption, file=file, **kwargs)
+    def __init__(self, id, caption, file, **kwargs):
+        super(GraphicFeature, self).__init__(id, caption=caption, file=file, **kwargs)
 
 
 class EasyReport(object):

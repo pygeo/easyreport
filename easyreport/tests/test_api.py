@@ -40,7 +40,7 @@ class TestAPIWriter(TestCase):
             error_thrown = True
         self.assertTrue(error_thrown)
 
-        F = Feature()
+        F = Feature('a')
         R.add('models', (1,2))  # add a tuple as test
         R.add('models', F)  # add feature
         R.add('observations', (3,4))
@@ -78,6 +78,8 @@ class TestAPIWriter(TestCase):
         self.assertEqual(x['models'][1][3], 4)
         self.assertEqual(x['observations'][0]['a'], 'b')
 
+        F = Feature('MPI-ESM', x=1, y=5, z='hello')
+
 
 
 class TestFeature(TestCase):
@@ -86,14 +88,16 @@ class TestFeature(TestCase):
         pass
 
     def test_init(self):
-        F = Feature(a=1, b=5, c='hello')
+        F = Feature('myid', a=1, b=5, c='hello')
+        self.assertEqual(F.id, 'myid')
         self.assertEqual(F.a, 1)
         self.assertEqual(F.b, 5)
         self.assertEqual(F.c, 'hello')
 
     def test_graphic(self):
-        G = GraphicFeature('my caption', 'test.png', a=4, b=5, c='test')
+        G = GraphicFeature('theid', 'my caption', 'test.png', a=4, b=5, c='test')
         self.assertEqual(G.a, 4)
+        self.assertEqual(G.id, 'theid')
         self.assertEqual(G.b, 5)
         self.assertEqual(G.c, 'test')
         self.assertEqual(G.caption, 'my caption')
