@@ -4,6 +4,7 @@ API to be integrated in client programs
 
 import os
 import sys
+import yaml
 
 
 class Feature(object):
@@ -70,8 +71,9 @@ class EasyReport(object):
     def save(self):
         if os.path.exists(self.file):
             os.remove(self.file)
+        yaml.dump(self.sections, stream=open(self.file, 'w'), default_flow_style=False)
 
-        os.system('touch ' + self.file)
+        #~ os.system('touch ' + self.file)
 
         #~ self.indent = '    '
         #~ self.eol = '\n'

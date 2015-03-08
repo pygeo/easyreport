@@ -3,13 +3,12 @@ from nose.tools import assert_raises
 import os
 import sys
 
-
-
 cpath = os.path.dirname(os.path.realpath(__file__)) + os.sep + '..' + os.sep + '..'
 sys.path.insert(0,cpath)
 
 from easyreport import EasyReport, Feature, GraphicFeature
 import tempfile
+import yaml
 
 class TestAPIWriter(TestCase):
 
@@ -59,16 +58,24 @@ class TestAPIWriter(TestCase):
         self.assertEqual(R.sections['misc'][0][5], 6)
 
     def test_save(self):
+        # check saving of data to yml file
         R = EasyReport(file=self.file)
+        R.add('models', (1,2))
+        R.add('models', (3,4))
+        R.add('observations', ('a','b'))
         R.save()
         self.assertTrue(os.path.exists(self.yml))
+
+        x = yaml.load(open(self.yml))
+        self.assertEqual(len(x.keys()),2)
+
+
 
 
 class TestFeature(TestCase):
 
     def setUp(self):
-        self.file = tempfile.mktemp()
-        self.yml = self.file + '.yml'
+        pass
 
     def test_init(self):
         F = Feature(a=1, b=5, c='hello')
