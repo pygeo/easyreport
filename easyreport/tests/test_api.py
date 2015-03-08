@@ -3,8 +3,9 @@ from nose.tools import assert_raises
 import os
 import sys
 
-cpath = os.path.dirname(os.path.realpath(__file__)) + os.sep + '..' + os.sep + '..'
-sys.path.insert(0,cpath)
+cpath = os.path.dirname(os.path.realpath(__file__)) + os.sep
+rpath =  cpath + '..' + os.sep + '..'
+sys.path.insert(0, rpath)
 
 from easyreport import EasyReport, Feature, GraphicFeature
 import tempfile
@@ -67,8 +68,15 @@ class TestAPIWriter(TestCase):
         self.assertTrue(os.path.exists(self.yml))
 
         x = yaml.load(open(self.yml))
+        #1
         self.assertEqual(len(x.keys()),2)
-
+        #2
+        for k in x.keys():
+            k in R.sections.keys()
+        #3
+        self.assertEqual(x['models'][0][1], 2)
+        self.assertEqual(x['models'][1][3], 4)
+        self.assertEqual(x['observations'][0]['a'], 'b')
 
 
 

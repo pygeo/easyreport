@@ -73,11 +73,4 @@ class EasyReport(object):
             os.remove(self.file)
         yaml.dump(self.sections, stream=open(self.file, 'w'), default_flow_style=False)
 
-        #~ os.system('touch ' + self.file)
-
-        #~ self.indent = '    '
-        #~ self.eol = '\n'
-        #~ self.n = 0
-        #~ if os.path.exists(self.file):
-            #~ os.remove(self.file)
 
