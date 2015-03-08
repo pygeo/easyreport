@@ -50,9 +50,13 @@ class TestData(TestCase):
         for k in R.sections.keys():
             self.assertTrue(k in ['models', 'observations', 'misc'])
 
-        self.assertEqual(R.sections['models'][1],2)
+        self.assertEqual(len(R.sections['models']), 2)
+        self.assertEqual(len(R.sections['observations']), 1)
+        self.assertEqual(len(R.sections['misc']), 1)
 
-
+        self.assertEqual(R.sections['models'][0][1], 2)
+        self.assertEqual(R.sections['observations'][0][3], 4)
+        self.assertEqual(R.sections['misc'][0][5], 6)
 
     def test_save(self):
         R = EasyReport(file=self.file)
