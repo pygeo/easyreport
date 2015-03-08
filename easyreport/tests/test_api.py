@@ -8,7 +8,7 @@ import sys
 cpath = os.path.dirname(os.path.realpath(__file__)) + os.sep + '..' + os.sep + '..'
 sys.path.insert(0,cpath)
 
-from easyreport import EasyReport, Feature
+from easyreport import EasyReport, Feature, GraphicFeature
 import tempfile
 
 class TestAPIWriter(TestCase):
@@ -40,7 +40,7 @@ class TestAPIWriter(TestCase):
             error_thrown = True
         self.assertTrue(error_thrown)
 
-        F = Feature(self.yml)
+        F = Feature()
         R.add('models', (1,2))  # add a tuple as test
         R.add('models', F)  # add feature
         R.add('observations', (3,4))
@@ -69,4 +69,21 @@ class TestFeature(TestCase):
     def setUp(self):
         self.file = tempfile.mktemp()
         self.yml = self.file + '.yml'
+
+    def test_init(self):
+        F = Feature(a=1, b=5, c='hello')
+        self.assertEqual(F.a, 1)
+        self.assertEqual(F.b, 5)
+        self.assertEqual(F.c, 'hello')
+
+    def test_graphic(self):
+        G = GraphicFeature('my caption', 'test.png', a=4, b=5, c='test')
+        self.assertEqual(G.a, 4)
+        self.assertEqual(G.b, 5)
+        self.assertEqual(G.c, 'test')
+        self.assertEqual(G.caption, 'my caption')
+        self.assertEqual(G.file, 'test.png')
+
+
+
 

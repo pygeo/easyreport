@@ -10,21 +10,13 @@ class Feature(object):
     """
     class to handle
     """
-    def __init__(self):
-        pass
+    def __init__(self, **kwargs):
+        for k in kwargs.keys():  # set class attributes from kwargs
+            setattr(self, k, kwargs[k])
 
-    def add_graphic(self, filename, caption=None):
-        """
-        add a graphic to the file
-        """
-        assert os.path.exists(filename), 'Graphics file you want to add is not existing!'
-        self.n += 1
-        o = open(self.file, 'a')
-        o.write('File_' + str(self.n).zfill(8) + ':' + self.eol)
-        o.write(self.indent + 'file : ' + filename + self.eol)
-        if caption is not None:
-            o.write(self.indent + 'caption : ' + caption + self.eol)
-        o.close()
+class GraphicFeature(Feature):
+    def __init__(self, caption, file, **kwargs):
+        super(GraphicFeature, self).__init__(caption=caption, file=file, **kwargs)
 
 
 class EasyReport(object):
