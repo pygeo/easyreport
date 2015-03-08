@@ -10,13 +10,8 @@ class Feature(object):
     """
     class to handle
     """
-    def __init__(self, file):
-        self.file = file
-        self.indent = '    '
-        self.eol = '\n'
-        self.n = 0
-        if os.path.exists(self.file):
-            os.remove(self.file)
+    def __init__(self):
+        pass
 
     def add_graphic(self, filename, caption=None):
         """
@@ -86,5 +81,9 @@ class EasyReport(object):
 
         os.system('touch ' + self.file)
 
-
+        #~ self.indent = '    '
+        #~ self.eol = '\n'
+        #~ self.n = 0
+        #~ if os.path.exists(self.file):
+            #~ os.remove(self.file)
 

@@ -11,7 +11,7 @@ sys.path.insert(0,cpath)
 from easyreport import EasyReport, Feature
 import tempfile
 
-class TestData(TestCase):
+class TestAPIWriter(TestCase):
 
     def setUp(self):
         self.file = tempfile.mktemp()
@@ -64,5 +64,9 @@ class TestData(TestCase):
         self.assertTrue(os.path.exists(self.yml))
 
 
+class TestFeature(TestCase):
 
+    def setUp(self):
+        self.file = tempfile.mktemp()
+        self.yml = self.file + '.yml'
 
