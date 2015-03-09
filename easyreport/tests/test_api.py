@@ -87,12 +87,14 @@ class TestAPIWriter(TestCase):
         self.assertEqual(x['observations'][0]['a'], 'b')
 
         #4 test Feature results
-        #~ self.assertEqual(x['model_list'][0]['MPI-ESM-LR']['x'], 1)
+        #self.assertEqual(x['model_list'][0]['MPI-ESM-LR']['x'], 1)
         #~ self.assertEqual(x['model_list']['MPI-ESM-LR']['y'], 5)
 
         #~ assert False
 
-
+#~ - MPI-ESM-LR:
+    #~ graphic1: MPI-ESM-LR.png
+    #~ graphic_test: MPI-ESM-LR.jpg
 
 #todo tests for graohics !!!
 
@@ -109,6 +111,23 @@ class TestFeature(TestCase):
         self.assertEqual(F.a, 1)
         self.assertEqual(F.b, 5)
         self.assertEqual(F.c, 'hello')
+
+    def test_2dict(self):
+        F = Feature('myid', a=1, b=5, c='hello')
+        self.assertEqual(F.id, 'myid')
+        self.assertEqual(F.a, 1)
+        self.assertEqual(F.b, 5)
+        self.assertEqual(F.c, 'hello')
+
+        r = F._att2dict()
+        self.assertTrue(type(r) is dict)
+        self.assertEqual(len(r.keys()), 4)
+        for k in r.keys():
+            self.assertTrue(k in ['id', 'a', 'b', 'c'])
+        self.assertEqual(r['id'], 'myid')
+        self.assertEqual(r['b'], 5)
+
+
 
     def test_graphic(self):
         G = GraphicFeature('theid', 'my caption', 'test.png', a=4, b=5, c='test')

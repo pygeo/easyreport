@@ -16,9 +16,18 @@ class Feature(object):
         for k in kwargs.keys():  # set class attributes from kwargs
             setattr(self, k, kwargs[k])
 
+    def _att2dict(self):
+        """ converts attributes to dictionary """
+        o = {}
+        for attr, value in self.__dict__.iteritems():
+            o.update({attr : value})
+        return o
+
+
 class GraphicFeature(Feature):
     def __init__(self, id, caption, file, **kwargs):
         super(GraphicFeature, self).__init__(id, caption=caption, file=file, **kwargs)
+
 
 class EasyReport(object):
     """
@@ -82,11 +91,10 @@ class EasyReport(object):
             x = self.sections[k]  # always gives a list
             hlp = []
             for l in x:
-                print type(l)
                 if type(l) is dict:
                     hlp.append(l)
                 elif type(l) is Feature:
-                    pass
+                    hlp.append(l._att2dict())
                 else:
                     print type(l)
                     raise ValueError('Unknown input type!')
