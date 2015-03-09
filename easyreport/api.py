@@ -20,14 +20,12 @@ class GraphicFeature(Feature):
     def __init__(self, id, caption, file, **kwargs):
         super(GraphicFeature, self).__init__(id, caption=caption, file=file, **kwargs)
 
-
 class EasyReport(object):
     """
     main class to handle entire IO process for the client program
 
     Example
     -------
-
     F = EasyReport(file='test')
     F.add('model', myfeature1)
     F.add('model', 'hello')
@@ -42,7 +40,6 @@ class EasyReport(object):
         if self.file[:-4] != '.yml':
             self.file += '.yml'
 
-
     def add(self, section, v):
         """
         add a section to the report and store results in it
@@ -53,7 +50,6 @@ class EasyReport(object):
             value that shall be stored; needs to be either a (key,value) pair
             or a Feature object
         """
-
         def _append(v):
             if type(v) is tuple:
                 return {v[0] : v[1]}
@@ -72,6 +68,32 @@ class EasyReport(object):
     def save(self):
         if os.path.exists(self.file):
             os.remove(self.file)
-        yaml.dump(self.sections, stream=open(self.file, 'w'), default_flow_style=False)
+
+        resdict = self._gen_final_dict()
+        yaml.dump(resdict, stream=open(self.file, 'w'), default_flow_style=False)
+
+    def _gen_final_dict(self):
+        """
+        convert section information to a dictionary that can be
+        used for yml output
+        """
+        out = {}
+        for k in self.sections:
+            x = self.sections[k]  # always gives a list
+            hlp = []
+            for l in x:
+                print type(l)
+                if type(l) is dict:
+                    hlp.append(l)
+                elif type(l) is Feature:
+                    pass
+                else:
+                    print type(l)
+                    raise ValueError('Unknown input type!')
+            out.update({k : hlp})
+
+        #needs to be done recursively for Feature!!!
+
+        return out
 
 

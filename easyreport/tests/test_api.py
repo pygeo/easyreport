@@ -64,12 +64,20 @@ class TestAPIWriter(TestCase):
         R.add('models', (1,2))
         R.add('models', (3,4))
         R.add('observations', ('a','b'))
+
+        F1 = Feature('MPI-ESM-LR', x=1, y=5, z='hello1')
+        F2 = Feature('MPI-ESM-MR', x=2, y=15, z='hello2')
+        F3 = Feature('GFDL', x=3, y=25, z='hello3')
+        R.add('model_list', F1)
+        R.add('model_list', F2)
+        R.add('model_list', F3)
+
         R.save()
         self.assertTrue(os.path.exists(self.yml))
 
         x = yaml.load(open(self.yml))
         #1
-        self.assertEqual(len(x.keys()),2)
+        self.assertEqual(len(x.keys()),3)
         #2
         for k in x.keys():
             k in R.sections.keys()
@@ -78,7 +86,15 @@ class TestAPIWriter(TestCase):
         self.assertEqual(x['models'][1][3], 4)
         self.assertEqual(x['observations'][0]['a'], 'b')
 
-        F = Feature('MPI-ESM', x=1, y=5, z='hello')
+        #4 test Feature results
+        #~ self.assertEqual(x['model_list'][0]['MPI-ESM-LR']['x'], 1)
+        #~ self.assertEqual(x['model_list']['MPI-ESM-LR']['y'], 5)
+
+        #~ assert False
+
+
+
+#todo tests for graohics !!!
 
 
 
