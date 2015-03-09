@@ -92,11 +92,6 @@ class TestAPIWriter(TestCase):
         self.assertEqual(x['model_list'][1]['MPI-ESM-MR']['y'], 15)
         self.assertEqual(x['model_list'][2]['GFDL']['z'], 'hello3')
 
-        #~ assert False
-
-#~ - MPI-ESM-LR:
-    #~ graphic1: MPI-ESM-LR.png
-    #~ graphic_test: MPI-ESM-LR.jpg
 
 #todo tests for graohics !!!
 
@@ -129,8 +124,6 @@ class TestFeature(TestCase):
         self.assertEqual(r['myid']['a'], 1)
         self.assertEqual(r['myid']['b'], 5)
         self.assertEqual(r['myid']['c'], 'hello')
-
-
 
     def test_graphic(self):
         G = GraphicFeature('theid', 'my caption', 'test.png', a=4, b=5, c='test')
