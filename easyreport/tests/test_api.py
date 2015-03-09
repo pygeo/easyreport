@@ -87,8 +87,10 @@ class TestAPIWriter(TestCase):
         self.assertEqual(x['observations'][0]['a'], 'b')
 
         #4 test Feature results
+        print self.yml
         self.assertEqual(x['model_list'][0]['MPI-ESM-LR']['x'], 1)
-        #~ self.assertEqual(x['model_list']['MPI-ESM-LR']['y'], 5)
+        self.assertEqual(x['model_list'][1]['MPI-ESM-MR']['y'], 15)
+        self.assertEqual(x['model_list'][2]['GFDL']['z'], 'hello3')
 
         #~ assert False
 
@@ -121,11 +123,12 @@ class TestFeature(TestCase):
 
         r = F._att2dict()
         self.assertTrue(type(r) is dict)
-        self.assertEqual(len(r.keys()), 4)
-        for k in r.keys():
-            self.assertTrue(k in ['id', 'a', 'b', 'c'])
-        self.assertEqual(r['id'], 'myid')
-        self.assertEqual(r['b'], 5)
+        self.assertEqual(len(r.keys()), 1)
+        for k in r['myid'].keys():
+            self.assertTrue(k in ['a', 'b', 'c'])
+        self.assertEqual(r['myid']['a'], 1)
+        self.assertEqual(r['myid']['b'], 5)
+        self.assertEqual(r['myid']['c'], 'hello')
 
 
 

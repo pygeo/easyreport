@@ -20,8 +20,11 @@ class Feature(object):
         """ converts attributes to dictionary """
         o = {}
         for attr, value in self.__dict__.iteritems():
-            o.update({attr : value})
-        return o
+            if attr == 'id':
+                pass
+            else:
+                o.update({attr : value})
+        return {self.id : o}
 
 
 class GraphicFeature(Feature):
