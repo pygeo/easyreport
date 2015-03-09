@@ -87,7 +87,7 @@ class TestAPIWriter(TestCase):
         self.assertEqual(x['observations'][0]['a'], 'b')
 
         #4 test Feature results
-        #self.assertEqual(x['model_list'][0]['MPI-ESM-LR']['x'], 1)
+        self.assertEqual(x['model_list'][0]['MPI-ESM-LR']['x'], 1)
         #~ self.assertEqual(x['model_list']['MPI-ESM-LR']['y'], 5)
 
         #~ assert False
